@@ -32,7 +32,7 @@ create table vacancies
     description       text,
     employer_id       int          not null references employers (employer_id),
     specialization_id integer      not null references specializations (specialization_id),
-    area_id           integer references areas (area_id),
+    area_id           integer      not null references areas (area_id),
     compensation_from integer,
     compensation_to   integer,
     created_at        timestamp default current_timestamp
@@ -42,7 +42,7 @@ create table resumes
 (
     resume_id         serial primary key,
     employee_id       integer not null references employees (employee_id),
-    area_id           integer references areas (area_id),
+    area_id           integer not null references areas (area_id),
     specialization_id integer not null references specializations (specialization_id),
     compensation_from integer,
     compensation_to   integer,

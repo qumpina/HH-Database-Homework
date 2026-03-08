@@ -89,7 +89,7 @@ select
 
     case
         when random() < 0.25 then null
-        else round(random()*120000 + 30000)
+        else round(random()*12000 + 10000)
     end,
 
     case
@@ -153,8 +153,13 @@ select
     (random()*199999 + 1)::int,
     'Interested in this position',
 
-    v.created_at + random() * interval '30 days'
+    timestamp '2010-01-01'
 
 from vacancies v
 limit 500000
 on conflict do nothing;
+
+update responses r
+set created_at = v.created_at + (1 + floor(random()*29)) * interval '1 day'
+from vacancies v
+where r.vacancy_id = v.vacancy_id;
